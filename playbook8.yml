@@ -1,0 +1,11 @@
+---
+- name: activity
+  hosts: group2
+  tasks:
+    - name: install maven
+      apt:
+        name: "{{a}}"
+        state: "{{b}}"
+        update_cache: "{{c}}"
+...
+

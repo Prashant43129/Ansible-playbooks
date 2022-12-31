@@ -1,0 +1,20 @@
+---
+- name: implement when condition
+  hosts: all
+  become: yes
+  tasks:
+    - name: check for file f1
+      stat:
+        path: /home/ubuntu/f1
+      register: a
+    - name: print output
+      debug: 
+        var: a
+    - name: give execute permission to f1
+      file:
+        name: /home/ubuntu/f1
+        mode: 427
+        owner: john
+        group: john
+      when: a.stat.exists == true 
+...          

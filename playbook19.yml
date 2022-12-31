@@ -1,0 +1,19 @@
+---
+- name: implement when condition
+  hosts: all
+  become: yes
+  tasks:
+    - name: check for file1
+      stat:
+        path: /home/ubuntu/file1
+      register: a
+    - name: display the output
+      debug:
+        var: a
+    - name: create file1 directory
+      file:
+        name: /home/ubuntu/file1
+        state: directory
+      when: a.stat.exists == false
+
+...          

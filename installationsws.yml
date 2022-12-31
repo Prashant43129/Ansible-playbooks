@@ -1,0 +1,11 @@
+---
+- name: activity4
+  hosts: all
+  tasks: 
+    - name:
+      apt:
+        name: "{{a}}"
+        state: "{{b}}"
+        update_cache: "{{c}}"
+...          
+

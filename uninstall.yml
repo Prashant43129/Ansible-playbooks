@@ -1,0 +1,15 @@
+---
+- name: uninstall sws
+  hosts: all
+  become: yes
+  tasks:
+    - name: delete sws
+      apt:
+        name: "{{item}}"
+        state: absent
+        purge: yes
+      with_items:
+         - tomcat9
+         - tomcat9-admin 
+         - apache2
+...           

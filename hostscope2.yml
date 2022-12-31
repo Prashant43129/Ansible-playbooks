@@ -1,0 +1,14 @@
+---
+- name: user creation
+  hosts: group3
+  tasks:
+    - name: create user
+      user:
+        name: "{{a}}"
+        password: "{{b}}"
+        home: "{{c}}"
+        shell: "{{d}}"
+        comment: "{{e}}"
+        uid: "{{f}}"
+...
+

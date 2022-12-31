@@ -1,0 +1,14 @@
+---
+- name: implement when condition
+  hosts: all
+  become: yes
+  tasks:
+    - name: check for hari user
+      gather_facts:
+        path: /etc/passwd/hari
+      register: a
+    - name: print the output
+      debug:
+         var: a
+...           
+

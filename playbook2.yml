@@ -1,0 +1,27 @@
+---
+- name: create a user and deleting some user
+  hosts: all
+  tasks:
+    - name: create new user
+      user:
+        name: luois
+        password: luois12345
+        uid: 3535
+        comment: "new user"
+        home: /home/luois
+        shell: /bin/bash
+    - name: delete tomcat9
+      apt:
+        name: tomcat9
+        state: absent
+        purge: yes
+    - name: delete tomcat9-admin
+      apt:
+        name: tomcat9-admin
+        state: absent
+        purge: yes
+    - name: delete a user
+      user:
+        name: tomcat
+        state: absent
+...          

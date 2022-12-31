@@ -1,0 +1,21 @@
+---
+- name: activity
+  hosts: all
+  become: yes
+  gather_facts: false
+  tasks:
+    - name: create user
+      user:
+        name: loki
+        password: loki123
+      tags: user_creation
+    - name: copy files
+      copy:
+        src: /etc/passwd
+        dest: /home/ubuntu
+      tags: file_copy
+    - name: create dir
+      file:
+        name: /home/ubuntu/dir1
+        state: directory
+...          

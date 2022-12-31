@@ -1,0 +1,14 @@
+---
+- name: configure tomcat9
+  become: yes
+  hosts: servers
+  tasks:
+    - include: "{{item}}"
+      with_items:
+        - installtomcat9.yml
+        - copy.yml
+        - changeport.yml
+        - restart.yml
+        - pause.yml
+        - checkurl.yml
+...          

@@ -1,0 +1,18 @@
+---
+- name: install sws bsed on os
+  become: yes
+  hosts: all
+  tasks:
+    - name: install tree using apt
+      apt:
+        name: tree
+        state: present
+        update_cache: yes
+      when: ansible_distribution == "ubuntu"
+    - name: install tree using yum
+      yum:
+        name: tree
+        state: present
+        update_cache: yes
+      when: ansible_distribution == "RedHat"
+...        

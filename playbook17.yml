@@ -1,0 +1,11 @@
+---
+- name: configure tomcat9
+  hosts: all
+  become: yes
+  tasks:
+    - name: call mutiple childplaybooks
+      include: "{{item}}"
+      with_items:
+       - installtomcat9.yml
+       - tomcat9_admin.yml
+...        

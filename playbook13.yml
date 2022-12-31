@@ -1,0 +1,52 @@
+---
+- name: configuring jenkins
+  hosts: jenkinsserver
+  become: yes
+  tasks:
+    - name: install sw's
+      apt:
+        name: "{{item.a}}"
+        state: present
+        update_cache: "{{item.b}}"
+      with_items:
+        - {a: openjdk-11-jdk,b: yes}
+        - {a: git,b: no}
+        - {a: maven,b: no}
+    - name: install jenkins
+      get_url:
+          url: https://get.jenkins.io/war-stable/2.375.1/jenkins.war
+          dest: /home/ubuntu
+- name: configuring tomcat
+  hosts: servers
+  become: yes
+  tasks:
+    - name: install sw's
+      apt:
+        name: "{{item.a}}"
+        state: present
+        update_cache: "{{item.b}}"
+      with_items:
+           - {a: tomcat9,b: yes}
+           - {a: tomcat9-admin,b: no}
+    - name: copy tomcat-users.xml file
+      copy:
+        src: tomcat-users.xml
+        dest: /etc/tomcat9
+      notify: restart tomcat9
+    - name: pause 
+      pause:
+        minutes: 1
+    - name: check url response
+      uri:
+        url: "{{item}}"
+        status_code: 200
+      with_items:
+        - http://172.31.18.128
+        - http://172.31.21.23
+  handlers:
+    - name: restart tomcat9
+      service:
+        name: tomcat9
+        state: restarted    
+...          
+

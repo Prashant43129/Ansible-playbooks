@@ -1,0 +1,15 @@
+---
+- name: check os info
+  hosts: all
+  become: yes
+  tasks:
+    - name: check os name
+      debug:
+        msg="{{ansible_distribution}}"
+    - name: check os version
+      debug:
+        msg="{{ansible_distribution_version}}"
+    - name: check major os version
+      debug:
+        msg="{{ansible_distribution_major_version}}"
+

@@ -1,0 +1,5 @@
+---
+- name: pause tomcat9
+  pause:
+    minutes: "{{l}}"
+...      

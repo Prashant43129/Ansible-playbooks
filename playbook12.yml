@@ -1,0 +1,17 @@
+---
+- name: sw's uninstallation
+  hosts: all
+  become: yes
+  tasks:
+    - name: uninstall
+      apt:
+        name: "{{item}}"
+        state: absent
+        purge: yes
+      with_items:
+        - openjdk-11-jdk
+        - git
+        - maven
+        - tomcat9
+        - tomcat9-admin
+...          

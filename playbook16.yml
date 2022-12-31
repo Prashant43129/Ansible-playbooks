@@ -1,0 +1,7 @@
+---
+- name: user creation
+  hosts: all
+  tasks:
+    - name: create user
+      include: cplaybook1.yml
+...      

@@ -1,0 +1,8 @@
+---
+a: sam
+b: sam123
+c: /home/sam
+d: /bin/bash
+e: "normal user"
+f: 5555
+...  

@@ -1,0 +1,16 @@
+---
+- name: implementing loops
+  hosts: group2
+  tasks:
+    - name: install sw's
+      apt:
+        name: "{{item}}"
+        state: present
+        update_cache: yes
+      with_items:
+         - git
+         - tree
+         - maven
+...           
+
+

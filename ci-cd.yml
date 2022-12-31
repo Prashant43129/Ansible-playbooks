@@ -1,0 +1,38 @@
+---
+- name: install sw's required for ci-cd
+  become: yes
+  hosts: all
+  tasks:
+    - name: install sw's
+      apt: 
+        name: "{{item.a}}"
+        state: present
+        update_cache: "{{item.b}}"
+      with_items:
+        - {a: openjdk-11-jdk,b: yes}
+        - {a: git,b: no}
+        - {a: maven,b: no}
+        - {a: tomcat9,b: no}
+        - {a: tomcat9-admin,b: no}
+- name: continous download and build
+  become: yes
+  hosts: devserver
+  tasks:
+    - name: cont. download
+      git:
+        repo: https://github.com/intelliqittrainings/maven.git
+        dest: /tmp/mygit
+    - name: cont. build
+      shell: cd /tmp/mygit;mvn package
+- name: cont. deployment and testing
+  become: yes
+  hosts: qaserver
+  tasks:
+    - name: copy artifact
+      copy:
+        src: /home/ubuntu/172.31.25.158/tmp/mygit/webapp/target/webapp.war
+        dest: /var/lib/tomcat9/webapps/testapp
+
+...
+
+

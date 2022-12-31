@@ -1,0 +1,32 @@
+---
+- name: activity5
+  hosts: all
+  vars:
+   - a: tomcat9
+   - b: present
+   - c: yes
+   - d: tomcat9-admin
+   - e: users.xml 
+   - f: /etc/tomcat9
+   - g: restarted
+  tasks:
+    - name: tomcat9
+      apt:
+        name: "{{a}}"
+        state: "{{b}}"
+        update_cache: "{{c}}"
+    - name: tomcat9
+      apt:
+        name: "{{d}}"
+        state: "{{b}}"
+        update_cache: "{{c}}"
+    - name: copy user file
+      copy:
+        src: "{{e}}"
+        dest: "{{f}}"
+    - name: restart
+      service:
+        name: "{{a}}"
+        state: "{{g}}"
+...          
+

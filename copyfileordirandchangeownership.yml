@@ -1,0 +1,13 @@
+---
+- name: activity3
+  hosts: all
+  tasks:
+    - name:
+      copy:
+        src: "{{a}}"
+        dest: "{{b}}"
+        mode: "{{c}}"
+        owner: "{{d}}"
+        group: "{{e}}"
+...          
+

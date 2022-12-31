@@ -1,0 +1,26 @@
+- name: configuring jenkins
+  hosts: jenkinsserver
+  become: yes
+  tasks:
+    - name: install sw's
+      apt:
+        name: "{{item.a}}"
+        state: present
+        update_cache: "{{item.b}}"
+      with_items:
+        - {a: openjdk-11-jdk,b: yes}
+        - {a: git,b: no}
+        - {a: maven,b: no}
+- name: configuring tomcat
+  hosts: servers
+  become: yes
+  tasks:
+    - name: install sw's
+      apt:
+        name: "{{item.a}}"
+        state: absent
+        purge_all: yes
+      with_items:
+           - tomcat9
+           - tomcat9-admin
+...

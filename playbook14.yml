@@ -1,0 +1,27 @@
+---
+- name: error handling
+  hosts: all
+  become: yes
+  tasks:
+    - block:
+      - name: install git & tree
+        apt:
+          name: "{{item.a}}"
+          state: present
+          update_cache: "{{item.b}}"
+        with_items:
+          - {a: git,b: yes}
+          - {a: tree,b: no}
+      rescue:
+        - name: install git & tree
+          yum:
+            name: "{{item.a}}"
+            state: present
+            update_cache: "{{item.b}}"
+          with_items:
+            - {a: tree,b: yes}
+            - {a: git,b: no}   
+...              
+
+
+

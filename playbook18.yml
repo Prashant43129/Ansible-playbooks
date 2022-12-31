@@ -1,0 +1,13 @@
+---
+- name: implement when condition
+  hosts: all
+  become: yes
+  vars:
+    - a: 10
+  tasks:
+    - name: install maven
+      apt:
+        name: maven
+        state: present
+        update_cache: yes
+      when: a == 10    

@@ -1,0 +1,42 @@
+---
+- name: configure apache2 and httpd 
+  become: yes
+  hosts: servers
+  tasks:
+    - name: install apache2
+      apt:
+        name: "{{a}}"
+        state: "{{b}}"
+        update_cache: "{{c}}"
+      when: ansible_distribution == "ubuntu"
+    - name: install httpd
+      yum:
+        name: "{{d}}"
+        state: "{{b}}"
+        update_cache: "{{c}}"
+      when: ansible_distribution == "RedHat"
+    - name: edit index.html
+      copy:
+        content: "{{e}}"
+        dest: "{{f}}"
+    - name: restart apache2
+      service:
+        name: "{{a}}"
+        state: "{{g}}"
+      when: ansible_distribution == "ubuntu"
+    - name: restart httpd
+      service:
+        name: "{{d}}"
+        state: "{{g}}"
+      when: ansible_distribution == "RedHat"    
+    - name: check url response
+      uri:
+        url: "{{item.a}}"
+        status_code: "{{item.b}}"
+      with_items:
+        - {a: "{{h}}",b: "{{i}}"}
+        - {a: "{{j}}",b: "{{i}}"}
+        - {a: "{{k}}",b: "{{i}}"} 
+...          
+
+             

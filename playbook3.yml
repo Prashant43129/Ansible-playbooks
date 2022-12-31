@@ -1,0 +1,22 @@
+---
+- name: practise content
+  hosts: all
+  tasks:
+    - name: create a directory
+      file:
+        name: dir
+        state: directory
+    - name: create a file
+      file:
+        name: dir/file1
+        state: touch
+    - name: delete a user1
+      user:
+        name: ram
+        state: absent
+    - name: delete a user2
+      user:
+        name: luois
+        state: absent
+...          
+

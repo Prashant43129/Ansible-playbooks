@@ -1,0 +1,7 @@
+---
+- name: create user
+  user:
+    name: john
+    password: john123
+    uid: 1212
+...      

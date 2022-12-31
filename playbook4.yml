@@ -1,0 +1,9 @@
+---
+- name: installing docker
+  hosts: all
+  tasks:
+    - name: copy from controller
+      fetch:
+        src: /home/ubuntu/dir/file1
+        dest: /tmp
+...          

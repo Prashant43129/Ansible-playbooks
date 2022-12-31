@@ -1,0 +1,9 @@
+---
+- name: activity3
+  hosts: all
+  tasks:
+    - name:
+      file:
+        name: "{{a}}"
+        state: "{{b}}"
+...
